@@ -22,7 +22,7 @@ To build this project, you will need the following components:
 ## Code
 
 The code for this project is available in the `follow_the_line.ino` file.
-You can also open the `qtr-xA_example.ino` file that includes an example of how to use the QTR reflectance sensor as an analog sensor to detect the position of a line.
+You can also open the `qtr_xA_example.ino` file that includes an example of how to use the QTR reflectance sensor as an analog sensor to detect the position of a line.
 
 ## Installation
 
