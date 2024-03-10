@@ -19,7 +19,6 @@ DRV8835MotorShield motors;
 
 void setup()
 {
-  pinMode(LED_PIN, OUTPUT);
   pinMode(BTN_PIN, INPUT);
 
   // uncomment one or both of the following lines if your motors' directions need to be flipped
@@ -41,7 +40,6 @@ void loop()
   if (var == HIGH)
   {
     delay(1000);
-    digitalWrite(LED_PIN, HIGH);
 
     motors.setM1Speed(200);
     motors.setM2Speed(200);
@@ -52,6 +50,18 @@ void loop()
     motors.setM2Speed(400);
 
     delay(2000);
+
+    
+    motors.setM1Speed(100);
+    motors.setM2Speed(400);
+
+    delay(1000);
+
+    
+    motors.setM1Speed(400);
+    motors.setM2Speed(400);
+
+    delay(5000);
 
     motors.setM1Speed(0);
     motors.setM2Speed(0);

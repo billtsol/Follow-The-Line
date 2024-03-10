@@ -20,7 +20,7 @@ const int SensorCount = 11;
 const int oddPin = 2;
 const int evenPin = 1;
 
-const int calibratoinLedPin = 13; // Το 13 ειναι σε αξιοποιηση
+const int calibratoinLedPin = 13;
 
 uint16_t sensorValues[SensorCount];
 
@@ -117,7 +117,7 @@ void printResults()
 {
 
   // print the calibration minimum values measured when emitters were on
-  Serial.begin(9600);
+  // Serial.begin(9600);
   for (uint8_t i = 0; i < SensorCount; i++)
   {
     Serial.print(qtr.calibrationOn.minimum[i]);
