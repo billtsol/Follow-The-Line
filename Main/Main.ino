@@ -9,32 +9,35 @@ const uint8_t SensorCount = 11;
 uint16_t sensorValues[SensorCount];
 
 const int oddPin = 2;
-const int evenPin = 1;
+const int evenPin = 12;
 
 /*************************************************************************
 * DRV8835 GPIO pins declaration
 *************************************************************************/
 int mode = 13;
-int aphase = 7;
-int aenbl = 10;
+int aphase = 10;
+int aenbl = 7;
 int bphase = 4;
 int benbl = 9;
+
+int max_speed = 150;
+int min_speed = -150;
 
 /*************************************************************************
 * Buttons pins declaration
 *************************************************************************/
-int buttoncalibrate = 12; //or pin A3
-int buttonstart = 12;
+int buttoncalibrate = 13;
+
 
 /*************************************************************************
 * PID controler variables
 *************************************************************************/
-float Kp = 0.0007; //related to the proportional control term; 
-              //change the value by trial-and-error (ex: 0.07).
-float Ki = 0.001; //related to the integral control term; 
-              //change the value by trial-and-error (ex: 0.0008).
-float Kd = 0.007; //related to the derivative control term; 
-              //change the value by trial-and-error (ex: 0.6).
+float Kp = 0.04; //related to the proportional control term; 
+                   //change the value by trial-and-error (ex: 0.07).
+float Ki = 0.0002;  //related to the integral control term; 
+                   //change the value by trial-and-error (ex: 0.0008).
+float Kd = 0.008;  //related to the derivative control term; 
+                   //change the value by trial-and-error (ex: 0.6).
 
 int P = 0;
 int I = 0;
@@ -42,8 +45,7 @@ int D = 0;
 
 int lastError = 0;
 
-int base_speed_A = 40;
-int base_speed_B = 40;
+int base_speed = 100;
 
 void setup() {
   Serial.begin(9600);
@@ -60,13 +62,9 @@ void setup() {
 
   digitalWrite(mode, HIGH); //one of the two control interfaces 
 
-  pinMode(LED_BUILTIN, OUTPUT);
+  delay(2000);
 
-  while (digitalRead(buttoncalibrate) == LOW) { } // the main function won't start until the robot is calibrated
-
-  calibration(); //calibrate the robot for 10 seconds
-
-  while (digitalRead(buttoncalibrate) == LOW) { } // the main function won't start until the robot is calibrated
+  calibration(); // Calibrate the robot for 10 seconds
 
 }
 
@@ -85,29 +83,17 @@ void PID_control(){
   
   lastError = error;
 
-  float motor_speed =( P*Kp + I*Ki + D*Kd)/10;
-  int motor_speed_A = base_speed_A - motor_speed; 
-  int motor_speed_B = base_speed_B + motor_speed;
+  float motor_speed = P*Kp + I*Ki + D*Kd;
+  int motor_speed_A = base_speed + motor_speed; 
+  int motor_speed_B = base_speed - motor_speed;
 
-  if (position > 4500 && position < 5500){
-    motor_speed_A = 40; 
-    motor_speed_B = 40;
-
-  }
-
-  if (motor_speed_A > 80) {
-    motor_speed_A = 80;
-  }
-  if (motor_speed_B > 80) {
-    motor_speed_B = 80;
-  }
-  if (motor_speed_A < -80) {
-    motor_speed_A = -80;
-  }
-  if (motor_speed_B < -80) {
-    motor_speed_B = -80;
-  }
-
+  // Set max speed
+  if (motor_speed_A > max_speed) { motor_speed_A = max_speed; }
+  if (motor_speed_B > max_speed) { motor_speed_B = max_speed; }
+  
+  // Set min speed
+  if (motor_speed_A < min_speed) { motor_speed_A = min_speed; }
+  if (motor_speed_B < min_speed) { motor_speed_B = min_speed; }
 
   Serial.print("\n");
   Serial.print("Line: ");
@@ -138,16 +124,16 @@ void PID_control(){
   Serial.print(motor_speed);
   Serial.print('\n');
   Serial.print('\n');
- 
-  // Serial.print("A: ");
-  // Serial.println(motor_speed_A);
-  
-  // Serial.print("B: ");
-  // Serial.println(motor_speed_B);
+
+  Serial.print("Speed A: ");
+  Serial.print(motor_speed_A);
+
+  Serial.print('\n');
+  Serial.print("Speed B: ");
+  Serial.print(motor_speed_B);
 
   forward_movement(motor_speed_A, motor_speed_B);
 
-  // delay(3000);
 }
 
 
@@ -158,7 +144,8 @@ void forward_movement(int speedA, int speedB) {
   }
   else {
     digitalWrite(aphase, HIGH);
-  }
+  } 
+  
   if (speedB < 0) {
     speedB = 0 - speedB;
     digitalWrite(bphase, HIGH);
@@ -166,21 +153,18 @@ void forward_movement(int speedA, int speedB) {
   else {
     digitalWrite(bphase, LOW);
   }
+
   analogWrite(aenbl, speedA);
   analogWrite(benbl, speedB);
 
-  Serial.print("A: ");
-  Serial.println(speedA);
-  
-  Serial.print("B: ");
-  Serial.println(speedB);
 }
 
 void calibration() {
-  digitalWrite(LED_BUILTIN, HIGH);
+  
+  // digitalWrite(buttoncalibrate, HIGH);
   for (uint16_t i = 0; i < 400; i++)
   {
     qtr.calibrate();
   }
-  digitalWrite(LED_BUILTIN, LOW);
+  // digitalWrite(buttoncalibrate, LOW);
 }
