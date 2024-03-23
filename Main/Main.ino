@@ -108,36 +108,6 @@ void PID_control()
     motor_speed_B = min_speed;
   }
 
-  // Serial.print("\n");
-  // Serial.print("Line: ");
-  // Serial.println(position);
-  // Serial.print("\n");
-
-  // Serial.print("P: ");
-  // Serial.print(P);
-  // Serial.print('\t');
-  // Serial.print("I: ");
-  // Serial.print(I);
-  // Serial.print('\t');
-  // Serial.print("D: ");
-  // Serial.print(D);
-  // Serial.print('\n');
-
-  // Serial.print("Kp: ");
-  // Serial.print(Kp);
-  // Serial.print('\t');
-  // Serial.print("Ki: ");
-  // Serial.print(Ki);
-  // Serial.print('\t');
-  // Serial.print("Kd: ");
-  // Serial.print(Kd);
-  // Serial.print('\t');
-
-  // Serial.print("sum: ");
-  // Serial.print(motor_speed);
-  // Serial.print('\n');
-  // Serial.print('\n');
-
   forward_movement(motor_speed_A, motor_speed_B);
 }
 
