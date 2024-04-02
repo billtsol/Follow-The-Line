@@ -52,6 +52,10 @@ int lastError = 0;
 int buttoncalibrate = A6;
 int startButton = A7;
 
+int stop = 0;
+unsigned long startTime = 0;
+int timer_duration = 5000; // Define timer duration in milliseconds (5 seconds)
+
 void setup() {
   Serial.begin(9600);
 
@@ -79,10 +83,20 @@ void setup() {
 
   while( analogRead(startButton) == 0); // Start Calibration A6
 
+  startTime = millis();
 }
 
 void loop() {
-  PID_control();
+  unsigned long currentTime = millis();
+  if (
+    (end() == 1 || stop == 1) &&
+    ( currentTime - startTime >= timer_duration )
+  ){
+    forward_movement(0,0);
+    stop = 1;
+  }else{
+    PID_control();
+  }
 }
 
 void PID_control(){
@@ -149,6 +163,20 @@ void calibration() {
   digitalWrite(13,LOW);
 }
 
+int end(){
+  int one_to_four = sensorValues[0] + sensorValues[1] + sensorValues[2] + sensorValues[3]; // Right
+  int middle =  sensorValues[4] + sensorValues[5] + sensorValues[6]; // Middle
+  int eight_to_eleven = sensorValues[7] + sensorValues[8] + sensorValues[9] + sensorValues[10]; // Left
+
+  if (
+    (one_to_four > 700) &&
+    (middle > 1200) &&
+    (eight_to_eleven > 700)
+  ){
+    return 1;
+  }
+  return 0;
+}
 
 //  Testing functions
 void qtrx_test(){
