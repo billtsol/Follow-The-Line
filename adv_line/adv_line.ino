@@ -27,17 +27,17 @@ int benbl = 9;
 
 int base_speed = 75;
 
-int max_speed = 120;
-int min_speed = -120;
+int max_speed = 250;
+int min_speed = -250;
 
 /*************************************************************************
 * PID controler variables
 *************************************************************************/
-float Kp = 0.04;  //related to the proportional control term;
+float Kp = 0.06;  //related to the proportional control term;
                    //change the value by trial-and-error (ex: 0.07). 0.03
-float Ki = 0.0009; //related to the integral control term;
+float Ki = 0.00004; //related to the integral control term;
                    //change the value by trial-and-error (ex: 0.0008). 0.00001
-float Kd = 0.4;  //related to the derivative control term;
+float Kd = 0.08;  //related to the derivative control term;
                    //change the value by trial-and-error (ex: 0.6). 0.3
 
 int P = 0;
@@ -164,14 +164,18 @@ void calibration() {
 }
 
 int end(){
-  int one_to_four = sensorValues[0] + sensorValues[1] + sensorValues[2] + sensorValues[3]; // Right
+  int one_two = sensorValues[0] + sensorValues[1] ; // Black
+  int three_four = sensorValues[2] + sensorValues[3]; // White
   int middle =  sensorValues[4] + sensorValues[5] + sensorValues[6]; // Middle
-  int eight_to_eleven = sensorValues[7] + sensorValues[8] + sensorValues[9] + sensorValues[10]; // Left
+  int seven_eight = sensorValues[7] + sensorValues[8]; // White
+  int eight_to_eleven =  + sensorValues[9] + sensorValues[10]; // Black
 
   if (
-    (one_to_four > 700) &&
-    (middle > 1200) &&
-    (eight_to_eleven > 700)
+    (one_two > 900) &&
+    (three_four < 900) &&
+    (middle > 900) &&
+    (seven_eight < 900) &&
+    (eight_to_eleven > 900)
   ){
     return 1;
   }
