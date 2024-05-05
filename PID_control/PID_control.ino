@@ -81,7 +81,7 @@ void setup() {
 
 void loop() {
   while( analogRead(buttoncalibrate) == 0); // Start Calibration A6
-  
+
   calibration(); // Calibrate the robot for 10 seconds
 
   forward_movement(0,0);
@@ -199,7 +199,7 @@ void calibration() {
   digitalWrite(13,HIGH);
   // int r = -1;
   // int l = 1;
-  for (uint16_t i = 0; i < 400; i++) { 
+  for (uint16_t i = 0; i < 400; i++) {
   //   if (i % 20 == 0){
   //     forward_movement(75 * r, 75 *  l);
   //     r = -r;

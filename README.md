@@ -16,7 +16,7 @@ To build this project, you will need the following components:
 
 ## Circuit Diagram
 
-![Circuit Diagram](circuit-diagram.png)
+![Circuit Diagram](circuit-diagram.pdf)
 
 ## Code
 
@@ -42,7 +42,6 @@ You can also open the `qtr_xA_example.ino` file that includes an example of how 
 ## Troubleshooting
 
 If the robot does not follow the line correctly, you may need to adjust the threshold values in the code or adjust the position of the QTR reflectance sensor.
-
 
 ## Feature thoughts for this project:
 
