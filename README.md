@@ -48,3 +48,7 @@ If the robot does not follow the line correctly, you may need to adjust the thre
 1. Add some LEDs to make the car follow the line in the dark: By adding some LEDs to the front of the robot, it can detect the line even in low light conditions. The LEDs can be programmed to turn on when the QTR sensor detects the line and turn off when it doesn't. This feature can improve the robot's performance in darker environments.
 
 2. Add some obstacle sensors to avoid objects in line: By adding some obstacle sensors to the sides of the robot, it can detect if there are any obstacles in its path and avoid them while staying on the line. This feature can improve the safety of the robot and prevent it from crashing into objects while following the line.
+
+## Images
+
+![pcb](img/pcb.jpg)
