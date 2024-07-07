@@ -7,6 +7,11 @@
 		(legacy_teardrops no)
 	)
 	(paper "A4")
+	(title_block
+		(title "Follow The Line")
+		(date "25/03/2024")
+		(company "BillTsol")
+	)
 	(layers
 		(0 "F.Cu" signal)
 		(31 "B.Cu" signal)
@@ -1883,7 +1888,6 @@
 			(at -0.175 -12.325 90)
 			(unlocked yes)
 			(layer "F.SilkS")
-			(hide yes)
 			(uuid "048b16a7-05ec-4cc2-b1be-26a34a4dd804")
 			(effects
 				(font
@@ -1944,8 +1948,6 @@
 			)
 		)
 		(path "/81dadf62-f764-429e-b158-e0ff0fa6897f")
-		(sheetname "Root")
-		(sheetfile "FollowTheLine.kicad_sch")
 		(attr through_hole)
 		(fp_rect
 			(start -4.945 -8.845)

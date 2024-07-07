@@ -16,7 +16,11 @@ To build this project, you will need the following components:
 
 ## Circuit Diagram
 
-![Circuit Diagram](circuit-diagram.pdf)
+![Circuit Diagram](img/circuit-diagram.png)
+
+## PCB
+
+![PCB](img/pcb.png)
 
 ## Code
 
@@ -50,5 +54,3 @@ If the robot does not follow the line correctly, you may need to adjust the thre
 2. Add some obstacle sensors to avoid objects in line: By adding some obstacle sensors to the sides of the robot, it can detect if there are any obstacles in its path and avoid them while staying on the line. This feature can improve the safety of the robot and prevent it from crashing into objects while following the line.
 
 ## Images
-
-![pcb](img/pcb.jpg)
