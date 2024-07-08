@@ -53,4 +53,7 @@ If the robot does not follow the line correctly, you may need to adjust the thre
 
 2. Add some obstacle sensors to avoid objects in line: By adding some obstacle sensors to the sides of the robot, it can detect if there are any obstacles in its path and avoid them while staying on the line. This feature can improve the safety of the robot and prevent it from crashing into objects while following the line.
 
-## Images
+## Final Images
+
+![final](img/final.jpg)
+![racing](img/racing.png)
